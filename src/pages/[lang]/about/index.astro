@@ -1,0 +1,54 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Icon from '../../../components/Icon.astro';
+import { author } from '../../../data/site';
+import { localePath, locales, t, type Locale } from '../../../i18n/ui';
+
+export const getStaticPaths = () => locales.map((l) => ({ params: { lang: l.code } }));
+const locale = Astro.params.lang as Locale;
+const d = t(locale).about;
+---
+<Layout locale={locale} current="about" title={t(locale).meta.aboutTitle} description={t(locale).meta.aboutDesc}>
+  <div class="wrap profile">
+    <img src="/logo.png" alt="" width="96" height="96" />
+    <div>
+      <p class="profile-role">{d.role}</p>
+      <h1>{author.name}</h1>
+      <p class="lead">{d.bio}</p>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <h2 class="small-head">{d.linksTitle}</h2>
+    <ul class="social">
+      {author.links.map((link) => {
+        const [name, note] = d.links[link.id];
+        return (
+          <li>
+            <a href={link.url} rel="noopener me" target="_blank">
+              <span class:list={['social-icon', link.id]}><Icon name={link.id} size={link.id === 'xiaohongshu' ? 44 : 26} /></span>
+              <strong>{name}</strong>
+              <span>{note}</span>
+              <Icon name="arrow" size={18} />
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+
+  <section class="wrap about-project">
+    <h2 class="small-head">{d.projectTitle}</h2>
+    <ul class="ext-list">
+      {d.project.map(([name, body, href]) => (
+        <li>
+          <a href={href.startsWith('http') ? href : localePath(locale, `/${href}`)} rel={href.startsWith('http') ? 'noopener' : undefined}>
+            <strong>{name}</strong>
+            <span>{body}</span>
+            <Icon name="arrow" size={18} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

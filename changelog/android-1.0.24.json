@@ -1,0 +1,11 @@
+{
+  "product": "android",
+  "version": "1.0.24",
+  "date": "2026-11-04",
+  "zh": [
+    "下载加入队列前先检查目标位置的可用空间。"
+  ],
+  "en": [
+    "Downloads now check available space at the destination before joining the queue."
+  ]
+}

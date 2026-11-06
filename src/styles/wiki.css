@@ -1,0 +1,89 @@
+/* 把 Starlight 的颜色接到站点色板上。 */
+:root {
+  --sl-font: var(--font-ui);
+  --sl-font-mono: var(--font-mono);
+  --sl-nav-height: 4.25rem;
+  --sl-nav-pad-y: 0.75rem;
+  --sl-nav-pad-x: clamp(1rem, 2.4vw, 1.75rem);
+  --sl-content-width: 46rem;
+  --sl-color-accent-low: #33200F;
+  --sl-color-accent: #EF7029;
+  --sl-color-accent-high: #FFB88C;
+  --sl-color-white: #F2F3F5;
+  --sl-color-gray-1: #DBDDE1;
+  --sl-color-gray-2: #BDBFC5;
+  --sl-color-gray-3: #989BA3;
+  --sl-color-gray-4: #5E6067;
+  --sl-color-gray-5: #2F3036;
+  --sl-color-gray-6: #1A1B1F;
+  --sl-color-black: #0D0E10;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #FBE6D8;
+  --sl-color-accent: #B14B0E;
+  --sl-color-accent-high: #7A3208;
+  --sl-color-white: #262625;
+  --sl-color-gray-1: #3B3B39;
+  --sl-color-gray-2: #52524E;
+  --sl-color-gray-3: #70706B;
+  --sl-color-gray-4: #A8A8A2;
+  --sl-color-gray-5: #DDDDD8;
+  --sl-color-gray-6: #F1F1EE;
+  --sl-color-gray-7: #F6F6F3;
+  --sl-color-black: #FAFAF8;
+}
+
+.header { border-bottom: 0; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(14px); }
+
+/* 搜索收进同一高度的胶囊，和导航对齐。 */
+.site-header site-search button[data-open-modal] {
+  width: auto;
+  max-width: 13rem;
+  min-width: 2.375rem;
+  height: 2.375rem;
+  padding-inline: 0.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.sidebar-pane { background: var(--bg); }
+
+/* 当前页与顶栏一样使用反色胶囊。 */
+.sidebar-content a[aria-current='page'] { background: var(--inverse); color: var(--on-inverse); border-radius: 10px; }
+.sidebar-content a[aria-current='page'] span { color: var(--on-inverse); }
+
+/* Starlight 自带的主题和语言选择已由顶栏替代。 */
+
+.sl-menu-button { background: var(--surface) !important; box-shadow: none !important; color: var(--fg) !important; }
+.mobile-preferences { display: none; }
+
+.sl-markdown-content :is(h2, h3) { font-weight: 700; }
+.sl-markdown-content code:not(pre code) { border-radius: 6px; }
+.content-panel h1 { font-weight: 800; }
+
+/* 操作路径里常用的“设置 → …”不换成链接色，但突出显示。 */
+.sl-markdown-content strong { font-weight: 650; color: var(--sl-color-white); }
+
+@media (max-width: 760px) {
+  :root { --sl-nav-height: 6.75rem; --sl-nav-pad-y: 0.5rem; }
+  /* 汉堡按钮排在顶栏第一行右侧。 */
+  .sl-menu-button { top: 0.5rem !important; }
+  .site-header[data-wiki] .actions { margin-inline-end: 3rem; }
+}
+
+@media (min-width: 761px) and (max-width: 50rem) {
+  .site-header[data-wiki] .actions { margin-inline-end: 3rem; }
+}
+
+@media (max-width: 480px) {
+  .site-header[data-wiki] .brand span { display: none; }
+}
+
+/* 中等宽度下搜索只保留图标，避免挤压导航。 */
+@media (max-width: 1100px) {
+  .site-header site-search button[data-open-modal] { padding-inline: 0; justify-content: center; }
+  .site-header site-search button[data-open-modal] > :not(svg) { display: none; }
+}

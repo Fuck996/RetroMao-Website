@@ -1,0 +1,66 @@
+name: Website
+
+# 三种情况会运行：
+# - 推送到 main：校验、构建、部署。
+# - 发布 Release：先把版本信息同步到下载页并提交，再校验、构建、部署。
+# - 拉取请求：只校验和构建，不提交也不部署。
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: website-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Release 事件默认检出标签，同步结果要提交到 main。
+          ref: ${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Sync download page from GitHub Releases
+        if: github.event_name != 'pull_request'
+        run: node scripts/sync-releases.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Check changelog (zh + en, download versions)
+        run: node scripts/check-changelog.mjs
+      - run: npm ci
+      - run: npm run build
+      - name: Commit synced download data
+        if: github.event_name != 'pull_request'
+        run: |
+          git add src/data/releases.json
+          if git diff --cached --quiet; then
+            echo "Download data is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: sync download versions"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Deploy to Cloudflare Pages
+        if: github.event_name != 'pull_request' && env.CLOUDFLARE_API_TOKEN != ''
+        run: npx --yes wrangler@4 pages deploy dist --project-name=retromao --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Warn when deploy is not configured
+        if: github.event_name != 'pull_request' && env.CLOUDFLARE_API_TOKEN == ''
+        run: echo "::warning::CLOUDFLARE_API_TOKEN is not set, so the site was built but not deployed."
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -1,0 +1,19 @@
+{
+  "repository": "Fuck996/RetroMao-Website",
+  "products": {
+    "android": {
+      "version": "1.0.32",
+      "file": "RetroMao-1.0.32.apk",
+      "sizeBytes": 84032473,
+      "sha256": "c163f1275f6e55deb9079d166f41456064198a2ae14c964ce13caaf957ca8868",
+      "githubUrl": ""
+    },
+    "3ds": {
+      "version": "1.0.24",
+      "file": "RetroMao-3DS-1.0.24.cia",
+      "sizeBytes": 4436928,
+      "sha256": "54f174dcc45ea223cdb8e29f5c59ecc030e6b732378a81a3aab6a4101c754904",
+      "githubUrl": ""
+    }
+  }
+}

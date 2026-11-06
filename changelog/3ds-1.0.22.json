@@ -1,0 +1,11 @@
+{
+  "product": "3ds",
+  "version": "1.0.22",
+  "date": "2026-11-05",
+  "zh": [
+    "云端正文缺失时会核验索引路径上的原文件。只缺少已被替代的历史正文时，保留版本关系并标记该版本不可恢复。"
+  ],
+  "en": [
+    "When cloud content is missing, the original file at the index path is now verified. If only replaced historical content is missing, version links are kept and that version is marked as not restorable."
+  ]
+}

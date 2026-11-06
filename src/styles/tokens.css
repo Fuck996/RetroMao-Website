@@ -1,0 +1,46 @@
+/* 颜色取自 App 内置主题：浅色为「简约白」，深色为「流光」；橙色取自复古猫图标。 */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #FAFAF8;
+  --surface: #F1F1EE;
+  --surface-2: #E8E8E3;
+  --fg: #262625;
+  --muted: #70706B;
+  --line: #DDDDD8;
+  --accent: #EF7029;
+  --accent-ink: #B14B0E;
+  --accent-soft: #FBE6D8;
+  --inverse: #262625;
+  --on-inverse: #FAFAF8;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0D0E10;
+  --surface: #1A1B1F;
+  --surface-2: #26272C;
+  --fg: #F2F3F5;
+  --muted: #989BA3;
+  --line: #2F3036;
+  --accent: #EF7029;
+  --accent-ink: #FF9A5C;
+  --accent-soft: #33200F;
+  --inverse: #F2F3F5;
+  --on-inverse: #0D0E10;
+}
+
+:root {
+  --font-latin: Roboto, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial;
+  --font-ui: var(--font-latin), 'PingFang SC', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+:lang(zh-Hant) {
+  --font-ui: var(--font-latin), 'PingFang TC', 'Microsoft JhengHei UI', 'Microsoft JhengHei', 'Noto Sans CJK TC', 'Noto Sans TC', sans-serif;
+}
+
+:lang(ja) {
+  --font-ui: var(--font-latin), 'Hiragino Sans', 'Yu Gothic UI', 'Yu Gothic', Meiryo, 'Noto Sans CJK JP', 'Noto Sans JP', sans-serif;
+}

@@ -1,0 +1,11 @@
+{
+  "product": "3ds",
+  "version": "1.0.21",
+  "date": "2026-11-05",
+  "zh": [
+    "兼容 Android 直接选取 Nintendo 3DS 目录生成的索引。"
+  ],
+  "en": [
+    "Added support for indexes created by selecting the Nintendo 3DS folder directly on Android."
+  ]
+}

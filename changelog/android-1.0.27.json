@@ -1,0 +1,11 @@
+{
+  "product": "android",
+  "version": "1.0.27",
+  "date": "2026-11-05",
+  "zh": [
+    "Android 版的 3DS 存档保护备份在发布中断后也能安全继续。"
+  ],
+  "en": [
+    "3DS save protection backups on Android now continue safely after an interrupted publication."
+  ]
+}

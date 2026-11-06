@@ -1,0 +1,132 @@
+---
+import * as OpenCC from 'opencc-js';
+import Layout from '../../../layouts/Layout.astro';
+import { locales, t, type Locale } from '../../../i18n/ui';
+
+export const getStaticPaths = () => locales.map((l) => ({ params: { lang: l.code } }));
+const locale = Astro.params.lang as Locale;
+const d = t(locale).changelog;
+
+interface Entry { product: 'android' | '3ds'; version: string; date: string; zh: string[]; en: string[] }
+
+const files = import.meta.glob<Entry>('../../../../changelog/*.json', { eager: true, import: 'default' });
+const parts = (v: string) => v.split('.').map(Number);
+const entries = Object.values(files).sort((a, b) => {
+  if (a.date !== b.date) return b.date.localeCompare(a.date);
+  if (a.product !== b.product) return a.product.localeCompare(b.product);
+  const [x, y] = [parts(a.version), parts(b.version)];
+  return y[0] - x[0] || y[1] - x[1] || y[2] - x[2];
+});
+
+// 日志只维护简中和英文：繁中由简中转换，日语显示英文。
+const toHant = OpenCC.Converter({ from: 'cn', to: 'twp' });
+const TERMS: [string, string][] = [['手柄', '控制器'], ['插件', '外掛程式'], ['外掛程式程式', '外掛程式'], ['網路硬碟', '網盤'], ['雲端硬碟', '網盤'], ['目錄', '資料夾'], ['平臺', '機種']];
+const hant = (text: string) => TERMS.reduce((out, [a, b]) => out.replaceAll(a, b), toHant(text));
+const lines = (e: Entry) => (locale === 'zh-hans' ? e.zh : locale === 'zh-hant' ? e.zh.map(hant) : e.en);
+---
+<Layout locale={locale} current="changelog" title={d.title} description={d.metaDesc}>
+  <div class="wrap page-title">
+    <h1>{d.title}</h1>
+    <p class="lead">{d.lead}</p>
+    {d.note && <p class="fine">{d.note}</p>}
+    <div class="changelog-filter" role="group" aria-label={d.title}>
+      <button type="button" data-filter="all" aria-pressed="true">{d.all}</button>
+      <button type="button" data-filter="android" aria-pressed="false">{d.android}</button>
+      <button type="button" data-filter="3ds" aria-pressed="false">{d.ds}</button>
+    </div>
+  </div>
+  <div class="wrap changelog-list">
+    {entries.map((e) => (
+      <section class="changelog-entry" id={`${e.product}-${e.version}`} data-product={e.product}>
+        <div class="changelog-meta">
+          <span class:list={['changelog-tag', { 'is-3ds': e.product === '3ds' }]}>{e.product === '3ds' ? d.ds : d.android}</span>
+          <strong>{e.version}</strong>
+          <span>{e.date}</span>
+        </div>
+        <ul lang={locale === 'ja' ? 'en' : undefined}>
+          {lines(e).map((line) => <li>{line}</li>)}
+        </ul>
+      </section>
+    ))}
+    <nav class="pager" aria-label={d.pager} hidden>
+      <button type="button" data-page-prev>{d.prev}</button>
+      <div class="pager-pages" data-page-list></div>
+      <button type="button" data-page-next>{d.next}</button>
+    </nav>
+  </div>
+  <script>
+    // 所有版本都输出在 HTML 里：没有脚本时直接全部显示，搜索引擎也能读到。
+    const PAGE_SIZE = 10;
+    const entries = [...document.querySelectorAll<HTMLElement>('.changelog-entry')];
+    const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const pager = document.querySelector<HTMLElement>('.pager')!;
+    const list = document.querySelector<HTMLElement>('[data-page-list]')!;
+    const prev = document.querySelector<HTMLButtonElement>('[data-page-prev]')!;
+    const next = document.querySelector<HTMLButtonElement>('[data-page-next]')!;
+    const validProduct = (v: string | null) => (v === 'android' || v === '3ds' ? v : 'all');
+
+    const query = new URLSearchParams(location.search);
+    let product = validProduct(query.get('product'));
+    let page = Math.max(1, Number.parseInt(query.get('page') ?? '1', 10) || 1);
+
+    const matching = () => entries.filter((e) => product === 'all' || e.dataset.product === product);
+
+    const syncUrl = () => {
+      const params = new URLSearchParams();
+      if (product !== 'all') params.set('product', product);
+      if (page > 1) params.set('page', String(page));
+      const search = params.toString();
+      history.replaceState(null, '', `${location.pathname}${search ? `?${search}` : ''}`);
+    };
+
+    const render = (scroll = false) => {
+      const shown = matching();
+      const pages = Math.max(1, Math.ceil(shown.length / PAGE_SIZE));
+      page = Math.min(page, pages);
+      const start = (page - 1) * PAGE_SIZE;
+      const visible = new Set(shown.slice(start, start + PAGE_SIZE));
+      entries.forEach((e) => { e.hidden = !visible.has(e); });
+      filters.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === product)));
+      pager.hidden = pages < 2;
+      prev.disabled = page === 1;
+      next.disabled = page === pages;
+      list.replaceChildren(...Array.from({ length: pages }, (_, i) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = String(i + 1);
+        if (i + 1 === page) button.setAttribute('aria-current', 'page');
+        button.addEventListener('click', () => go(i + 1));
+        return button;
+      }));
+      if (scroll) document.querySelector('.changelog-filter')?.scrollIntoView({ block: 'center' });
+    };
+
+    function go(target: number) {
+      page = target;
+      render(true);
+      syncUrl();
+    }
+
+    prev.addEventListener('click', () => go(page - 1));
+    next.addEventListener('click', () => go(page + 1));
+    filters.forEach((button) => button.addEventListener('click', () => {
+      product = validProduct(button.dataset.filter ?? null);
+      page = 1;
+      render();
+      syncUrl();
+    }));
+
+    // 下载页会用 #android-1.0.32 这样的地址跳到具体版本，要先翻到它所在的页。
+    const openHash = () => {
+      const target = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+      if (!target || !entries.includes(target)) return false;
+      if (product !== 'all' && target.dataset.product !== product) product = 'all';
+      page = Math.floor(matching().indexOf(target) / PAGE_SIZE) + 1;
+      render();
+      target.scrollIntoView();
+      return true;
+    };
+    if (!openHash()) render();
+    addEventListener('hashchange', openHash);
+  </script>
+</Layout>

@@ -1,0 +1,90 @@
+---
+import Icon from './Icon.astro';
+import { detectLocaleScript, langOf, localePath, locales, stripLocale, t, type Locale } from '../i18n/ui';
+import '../styles/header.css';
+
+interface Props { locale: Locale; current: 'home' | 'download' | 'changelog' | 'wiki' | 'about' | 'none'; wiki?: boolean }
+const { locale, current, wiki = false } = Astro.props;
+const d = t(locale);
+const path = stripLocale(Astro.url.pathname);
+const items = [
+  ['home', '/'],
+  ['download', '/download/'],
+  ['changelog', '/changelog/'],
+  ['wiki', '/wiki/'],
+  ['about', '/about/'],
+] as const;
+---
+<div class="site-header" data-wiki={wiki ? '' : undefined}>
+  <a class="brand" href={localePath(locale)}>
+    <img src="/logo.png" alt="" width="36" height="36" />
+    <span>{locale === 'en' || locale === 'ja' ? 'RetroMao' : langOf(locale) === 'zh-Hant' ? '復古貓' : '复古猫'}</span>
+  </a>
+  <nav class="pills" aria-label={d.nav.menu}>
+    {items.map(([key, href]) => (
+      <a href={localePath(locale, href)} aria-current={current === key ? 'page' : undefined}>{d.nav[key]}</a>
+    ))}
+  </nav>
+  <div class="actions">
+    <slot name="search" />
+    <details class="lang">
+      <summary aria-label={d.nav.language}>
+        <Icon name="globe" size={18} />
+        <span class="lang-name">{locales.find((l) => l.code === locale)!.label}</span>
+        <Icon name="chevron" size={14} />
+      </summary>
+      <div class="lang-menu" role="group" aria-label={d.nav.language}>
+        <a href={localePath(locale, path)} data-follow-system data-path={path}>{d.nav.followSystem}</a>
+        <hr />
+        {locales.map((l) => (
+          <a href={localePath(l.code, path)} lang={l.lang} data-locale={l.code} aria-current={l.code === locale ? 'true' : undefined}>
+            {l.label}
+            {l.code === locale && <Icon name="check" size={16} />}
+          </a>
+        ))}
+      </div>
+    </details>
+    <button class="icon-btn theme-toggle" type="button" aria-label={d.nav.theme} title={d.nav.theme}>
+      <span class="only-dark"><Icon name="sun" size={18} /></span>
+      <span class="only-light"><Icon name="moon" size={18} /></span>
+    </button>
+  </div>
+</div>
+
+<script is:inline set:html={detectLocaleScript}></script>
+<script is:inline>
+  (function () {
+    function store(key, value) {
+      try { value === null ? localStorage.removeItem(key) : localStorage.setItem(key, value); } catch (e) {}
+    }
+    document.querySelectorAll('[data-locale]').forEach(function (a) {
+      a.addEventListener('click', function () { store('retromao-locale', a.dataset.locale); });
+    });
+    document.querySelectorAll('[data-follow-system]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        store('retromao-locale', null);
+        location.href = '/' + window.rmLocale() + a.dataset.path + location.hash;
+      });
+    });
+    document.querySelectorAll('.theme-toggle').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        store('starlight-theme', next);
+      });
+    });
+    document.addEventListener('click', function (e) {
+      document.querySelectorAll('details.lang[open]').forEach(function (m) {
+        if (!m.contains(e.target)) m.open = false;
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('details.lang[open]').forEach(function (m) {
+        m.open = false;
+        m.querySelector('summary').focus();
+      });
+    });
+  })();
+</script>

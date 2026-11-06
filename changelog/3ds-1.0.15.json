@@ -1,0 +1,13 @@
+{
+  "product": "3ds",
+  "version": "1.0.15",
+  "date": "2026-11-04",
+  "zh": [
+    "普通档案未初始化但扩展档案可用时，允许独立同步扩展档案。",
+    "浏览和勾选时显示本机存档范围，确认页汇总各类存档数量。"
+  ],
+  "en": [
+    "Extra data can now sync on its own when the save isn’t initialized.",
+    "The save scope is now shown while browsing, and the confirmation page summarizes each type."
+  ]
+}

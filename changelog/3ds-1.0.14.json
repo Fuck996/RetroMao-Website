@@ -1,0 +1,13 @@
+{
+  "product": "3ds",
+  "version": "1.0.14",
+  "date": "2026-11-04",
+  "zh": [
+    "系统返回找不到存档或尚未初始化时，本轮跳过该游戏并继续同步其他游戏。",
+    "错误详情会显示完整的系统返回码。"
+  ],
+  "en": [
+    "When the system reports a missing or uninitialized save, that game is skipped and sync continues with the others.",
+    "Error details now show the full system result code."
+  ]
+}

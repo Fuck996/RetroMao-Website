@@ -1,0 +1,15 @@
+{
+  "product": "android",
+  "version": "1.0.25",
+  "date": "2026-11-04",
+  "zh": [
+    "刷新游戏库时补齐缺失的 ROM 哈希。",
+    "已核验的 ROM 角标改为小批量发布。",
+    "启动时优先完成当前机种的检查。"
+  ],
+  "en": [
+    "Refreshing the library now fills in missing ROM hashes.",
+    "Verified ROM badges are now published in small batches.",
+    "On startup, the check for the selected system finishes first."
+  ]
+}

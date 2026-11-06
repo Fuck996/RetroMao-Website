@@ -1,0 +1,11 @@
+{
+  "product": "3ds",
+  "version": "1.0.20",
+  "date": "2026-11-05",
+  "zh": [
+    "同步时跳过模拟器索引中误收录的游戏安装内容。"
+  ],
+  "en": [
+    "Sync now skips installed game content that was mistakenly included in emulator indexes."
+  ]
+}

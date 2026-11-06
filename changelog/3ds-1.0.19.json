@@ -1,0 +1,11 @@
+{
+  "product": "3ds",
+  "version": "1.0.19",
+  "date": "2026-11-04",
+  "zh": [
+    "按实际操作显示同步进度，结果逐个游戏标明已下载、已上传、已写入本机、云端已更新或内容一致。"
+  ],
+  "en": [
+    "Sync progress now reflects the actual operation, and results show per game whether a save was downloaded, uploaded, written locally, updated in the cloud or already matching."
+  ]
+}

@@ -1,0 +1,16 @@
+---
+import Pagination from 'virtual:starlight/components/Pagination';
+import { t, type Locale } from '../i18n/ui';
+
+const locale = (Astro.locals.starlightRoute.locale ?? 'zh-hans') as Locale;
+---
+<footer class="wiki-footer">
+  <Pagination />
+  <p>{t(locale).footer.legal}</p>
+  <p>Copyright © 2026 4NPC. All rights reserved.</p>
+</footer>
+
+<style>
+  .wiki-footer { margin-top: 3rem; }
+  .wiki-footer p { margin-top: 1.25rem; font-size: 0.8125rem; color: var(--sl-color-gray-3); }
+</style>

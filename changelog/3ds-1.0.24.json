@@ -1,0 +1,13 @@
+{
+  "product": "3ds",
+  "version": "1.0.24",
+  "date": "2026-11-05",
+  "zh": [
+    "修复恢复前的保护上传被云端分支缺失正文阻塞的问题。",
+    "无法取得恢复正文时，可以保留现状，或以当前可读的本机存档发布新版本。"
+  ],
+  "en": [
+    "Fixed protective uploads before a restore being blocked when a cloud branch was missing its content.",
+    "When restore content isn’t available, you can keep things as they are or publish a new version from the readable local save."
+  ]
+}

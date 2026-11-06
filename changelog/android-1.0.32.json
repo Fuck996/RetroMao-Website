@@ -1,0 +1,13 @@
+{
+  "product": "android",
+  "version": "1.0.32",
+  "date": "2026-11-06",
+  "zh": [
+    "平台扩展包升级到格式 3：可以声明图标、有无包装和介质、包装与介质的 GLB 模型、区域封面比例和材质，主题仍可按槽位覆盖。",
+    "平台包可以选择让 Logo 跟随主题颜色。"
+  ],
+  "en": [
+    "System packs move to format 3: they can declare icons, whether packaging and media exist, box and media GLB models, regional cover ratios and materials. Themes can still override each slot.",
+    "System packs can opt into theme-colored logos."
+  ]
+}

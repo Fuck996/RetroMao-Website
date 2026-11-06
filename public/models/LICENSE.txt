@@ -1,0 +1,11 @@
+RetroMao 3D models
+Copyright (c) 2026 4NPC. All rights reserved.
+
+These models are published only to present RetroMao on this website.
+Don't redistribute them or use them in other projects without permission.
+
+Game console names and designs belong to their respective owners.
+This project isn't affiliated with them.
+
+本目录的 3D 模型版权归 4NPC 所有，仅用于在本网站展示复古猫。
+未经许可，不得再分发，也不得用于其他项目。

@@ -1,0 +1,13 @@
+{
+  "product": "3ds",
+  "version": "1.0.23",
+  "date": "2026-11-05",
+  "zh": [
+    "可以从摘要一致的网盘原文件补回缺失的正文。",
+    "续传会核对正文是否仍在，确认索引后才更新模拟器目录。"
+  ],
+  "en": [
+    "Missing content can now be restored from a cloud file with a matching digest.",
+    "Resumed transfers check that content still exists, and update the emulator folder only after the index is confirmed."
+  ]
+}

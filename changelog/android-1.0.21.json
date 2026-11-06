@@ -1,0 +1,13 @@
+{
+  "product": "android",
+  "version": "1.0.21",
+  "date": "2026-11-04",
+  "zh": [
+    "中断的上传和索引确认可以恢复。",
+    "导入时按路径和街机集合识别 ROM 所属机种。"
+  ],
+  "en": [
+    "Interrupted uploads and index confirmations can now recover.",
+    "Import now identifies a ROM’s system from its path and arcade set."
+  ]
+}

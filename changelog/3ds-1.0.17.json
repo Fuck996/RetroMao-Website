@@ -1,0 +1,11 @@
+{
+  "product": "3ds",
+  "version": "1.0.17",
+  "date": "2026-11-04",
+  "zh": [
+    "只用云端当前分支的路径判断游戏所属的模拟器用户目录，历史版本保留供比对与恢复。"
+  ],
+  "en": [
+    "A game’s emulator user folder is now determined only from the current cloud branch. Past versions stay available for comparing and restoring."
+  ]
+}

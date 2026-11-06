@@ -1,0 +1,10 @@
+---
+import Search from 'virtual:starlight/components/Search';
+import SiteHeader from './SiteHeader.astro';
+import type { Locale } from '../i18n/ui';
+
+const locale = (Astro.locals.starlightRoute.locale ?? 'zh-hans') as Locale;
+---
+<SiteHeader locale={locale} current="wiki" wiki>
+  <Search slot="search" />
+</SiteHeader>

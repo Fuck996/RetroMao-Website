@@ -1,0 +1,51 @@
+---
+import { dictionaries, detectLocaleScript } from '../i18n/ui';
+import '../styles/tokens.css';
+
+const strings = Object.fromEntries(Object.entries(dictionaries).map(([k, v]) => [k, v.notFound]));
+---
+<!doctype html>
+<html lang="zh-Hans" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>404 · RetroMao</title>
+    <link rel="icon" href="/favicon.png" />
+    <script is:inline set:html={detectLocaleScript}></script>
+    <script is:inline>
+      (function () {
+        var s = null;
+        try { s = localStorage.getItem('starlight-theme'); } catch (e) {}
+        document.documentElement.dataset.theme = s === 'light' || s === 'dark' ? s
+          : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <img src="/logo.png" alt="" width="88" height="88" />
+    <p class="code">404</p>
+    <h1 id="t">{dictionaries['zh-hans'].notFound.title}</h1>
+    <p id="b">{dictionaries['zh-hans'].notFound.body}</p>
+    <a id="a" href="/zh-hans/">{dictionaries['zh-hans'].notFound.back}</a>
+    <script is:inline define:vars={{ strings }}>
+      var seg = location.pathname.split('/')[1];
+      var code = strings[seg] ? seg : window.rmLocale();
+      var s = strings[code];
+      document.documentElement.lang = { 'zh-hans': 'zh-Hans', 'zh-hant': 'zh-Hant', en: 'en', ja: 'ja' }[code];
+      document.getElementById('t').textContent = s.title;
+      document.getElementById('b').textContent = s.body;
+      var a = document.getElementById('a');
+      a.textContent = s.back;
+      a.href = '/' + code + '/';
+    </script>
+    <style>
+      body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 24px; text-align: center; background: var(--bg); color: var(--fg); font-family: var(--font-ui); }
+      img { border-radius: 20px; margin-bottom: 12px; }
+      .code { margin: 0; color: var(--accent-ink); font-weight: 700; letter-spacing: 0.1em; }
+      h1 { margin: 0; font-size: 28px; }
+      p { margin: 0; color: var(--muted); }
+      a { margin-top: 16px; padding: 10px 22px; border-radius: 999px; background: var(--inverse); color: var(--on-inverse); text-decoration: none; font-weight: 600; }
+    </style>
+  </body>
+</html>

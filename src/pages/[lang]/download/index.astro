@@ -1,0 +1,92 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Icon from '../../../components/Icon.astro';
+import { communityRepo, providers, releases } from '../../../data/site';
+import { localePath, locales, t, type Locale } from '../../../i18n/ui';
+
+export const getStaticPaths = () => locales.map((l) => ({ params: { lang: l.code } }));
+const locale = Astro.params.lang as Locale;
+const d = t(locale).download;
+const mib = (bytes: number) => `${(bytes / 1048576).toFixed(1)} MiB`;
+---
+<Layout locale={locale} current="download" title={t(locale).meta.downloadTitle} description={t(locale).meta.downloadDesc}>
+  <div class="wrap page-title">
+    <h1>{d.title}</h1>
+    <p class="lead">{d.lead}</p>
+  </div>
+
+  <div class="wrap releases">
+    {releases.map((r) => {
+      const info = r.id === 'android' ? d.android : d.ds;
+      return (
+        <article class="release">
+          <header>
+            <span class="release-icon"><Icon name={r.id === 'android' ? 'android' : 'ds'} size={30} /></span>
+            <div>
+              <h2>{info.name}</h2>
+              <p>{info.platform}</p>
+            </div>
+            <span class="version">{r.version}</span>
+          </header>
+          <p class="release-desc">{info.desc}</p>
+
+          <ul class="mirrors">
+            {r.mirrors.map((m) => {
+              const p = providers[m.provider];
+              return (
+                <li>
+                  <span class="mirror-name"><Icon name={p.icon} size={20} />{p.name[locale]}</span>
+                  {m.code && m.url && <button type="button" class="chip" data-copy={m.code} data-done={d.copied}>{d.code} {m.code}</button>}
+                  {m.url
+                    ? <a class="btn primary small" href={m.url} rel="noopener" target="_blank">{d.get}</a>
+                    : <span class="btn small disabled" aria-disabled="true">{d.pending}</span>}
+                </li>
+              );
+            })}
+          </ul>
+
+          <dl class="specs">
+            <div><dt>{d.requirement}</dt><dd>{info.req}</dd></div>
+            <div><dt>{d.file}</dt><dd>{r.file}</dd></div>
+            <div><dt>{d.size}</dt><dd>{mib(r.sizeBytes)}</dd></div>
+            <div class="sha">
+              <dt>{d.sha}</dt>
+              <dd><code>{r.sha256}</code><button type="button" class="chip" data-copy={r.sha256} data-done={d.copied}>{d.copy}</button></dd>
+            </div>
+          </dl>
+
+          <div class="release-links">
+            <a class="text-link" href={localePath(locale, `/${info.install}`)}>{d.guide}<Icon name="arrow" size={16} /></a>
+            <a class="text-link" href={localePath(locale, `/changelog/#${r.id}-${r.version}`)}>{d.changes}<Icon name="arrow" size={16} /></a>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+
+  <div class="wrap notes">
+    <p class="fine">{d.syncNote}</p>
+    <div class="ext-note">
+      <div>
+        <h2>{d.extTitle}</h2>
+        <p>{d.extBody}</p>
+      </div>
+      <a class="btn" href={communityRepo} rel="noopener" target="_blank"><Icon name="github" size={18} />{d.extLink}</a>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+      const label = button.textContent;
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(button.dataset.copy!);
+          button.textContent = button.dataset.done!;
+          setTimeout(() => { button.textContent = label; }, 1500);
+        } catch {
+          // 剪贴板不可用时，文字本身仍可手动选中复制。
+        }
+      });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,11 @@
+{
+  "product": "3ds",
+  "version": "1.0.16",
+  "date": "2026-11-04",
+  "zh": [
+    "Loader 连接已满时，按 Title ID 和已知例外探测扩展档案，其他候选由你确认关联或本次跳过。"
+  ],
+  "en": [
+    "When Loader connections are full, extra data is now probed by Title ID and known exceptions. You can confirm or skip other candidates."
+  ]
+}

@@ -1,0 +1,30 @@
+---
+import { detectLocaleScript, locales, localePath, t } from '../i18n/ui';
+
+interface Props { path: string }
+const { path } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RetroMao</title>
+    <meta name="description" content={t('zh-hans').meta.homeDesc} />
+    <link rel="icon" href="/favicon.png" />
+    {locales.map((l) => <link rel="alternate" hreflang={l.lang} href={new URL(localePath(l.code, path), Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(path, Astro.site)} />
+    <script is:inline set:html={detectLocaleScript}></script>
+    <script is:inline define:vars={{ path }}>
+      location.replace('/' + window.rmLocale() + path + location.search + location.hash);
+    </script>
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-content: center; gap: 12px; font: 16px system-ui, sans-serif; text-align: center; background: #FAFAF8; color: #262625; }
+      a { color: inherit; }
+      @media (prefers-color-scheme: dark) { body { background: #0D0E10; color: #F2F3F5; } }
+    </style>
+  </head>
+  <body>
+    {locales.map((l) => <a href={localePath(l.code, path)} lang={l.lang}>{l.label}</a>)}
+  </body>
+</html>

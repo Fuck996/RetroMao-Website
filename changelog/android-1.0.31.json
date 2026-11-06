@@ -1,0 +1,13 @@
+{
+  "product": "android",
+  "version": "1.0.31",
+  "date": "2026-11-05",
+  "zh": [
+    "修复全局游戏搜索的导航问题。",
+    "让 Dreamcast 珠宝盒铰链的细纹更清晰可见。"
+  ],
+  "en": [
+    "Fixed navigation in global game search.",
+    "Made the ribs on the Dreamcast jewel case hinge clearly visible."
+  ]
+}

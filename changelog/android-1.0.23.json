@@ -1,0 +1,15 @@
+{
+  "product": "android",
+  "version": "1.0.23",
+  "date": "2026-11-04",
+  "zh": [
+    "ROM 上传在索引并发检查时也能正确确认。",
+    "下拉刷新只处理当前机种。",
+    "修复 Dreamcast 珠宝盒内页，并细化 Nintendo DS 游戏卡模型。"
+  ],
+  "en": [
+    "ROM uploads are now confirmed correctly during concurrent index checks.",
+    "Pull to refresh now only covers the selected system.",
+    "Restored the Dreamcast jewel case inlay and refined the Nintendo DS game card model."
+  ]
+}

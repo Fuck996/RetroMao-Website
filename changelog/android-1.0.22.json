@@ -1,0 +1,19 @@
+{
+  "product": "android",
+  "version": "1.0.22",
+  "date": "2026-11-04",
+  "zh": [
+    "支持导入 Windows 端生成的便携索引，街机游戏库可按硬件重新整理。",
+    "改进 Pegasus 导入：跳过无效行、识别带时间戳的索引、优先使用标准索引，并按 ROM 路径合并街机记录。",
+    "手柄导航覆盖更多菜单和选择操作，输入会发送给最上层的弹窗。",
+    "确认时启动当前选中的 ROM 文件，街机压缩包可以直接传给 FBNeo。",
+    "修复 Switch 游戏卡模型的外形和塑料质感。"
+  ],
+  "en": [
+    "Added import of portable indexes generated on Windows, and arcade libraries can be reorganized by hardware.",
+    "Improved Pegasus import: invalid lines are skipped, timestamped indexes are found, standard indexes are preferred, and arcade records merge by ROM path.",
+    "Controller navigation now covers more menus and selections, and input goes to the top dialog.",
+    "Confirming now launches the focused ROM file, and arcade archives pass directly to FBNeo.",
+    "Restored the Switch game card shape and softened its plastic finish."
+  ]
+}

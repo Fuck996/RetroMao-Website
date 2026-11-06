@@ -1,0 +1,30 @@
+---
+import { platformGroups } from '../data/site';
+import { t, type Locale } from '../i18n/ui';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale).shelf;
+---
+<div class="section-head">
+  <h2>{d.title}</h2>
+  <p>{d.body}</p>
+</div>
+<dl class="platform-groups">
+  {platformGroups.map((group) => (
+    <div>
+      <dt>{group.maker[locale]}</dt>
+      <dd>{group.names.join(' · ')}</dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  .platform-groups { border-top: 1px solid var(--line); }
+  .platform-groups > div {
+    display: grid; grid-template-columns: minmax(96px, 0.2fr) minmax(0, 1fr); gap: 16px;
+    padding: 14px 4px; border-bottom: 1px solid var(--line);
+  }
+  dt { font-weight: 700; }
+  dd { color: var(--muted); }
+</style>

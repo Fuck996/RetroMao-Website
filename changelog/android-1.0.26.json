@@ -1,0 +1,11 @@
+{
+  "product": "android",
+  "version": "1.0.26",
+  "date": "2026-11-05",
+  "zh": [
+    "Pegasus 索引中的媒体路径可以跨已配置的目录生效。"
+  ],
+  "en": [
+    "Media paths in Pegasus indexes now work across configured folders."
+  ]
+}

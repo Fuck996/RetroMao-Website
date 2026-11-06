@@ -1,0 +1,11 @@
+{
+  "product": "3ds",
+  "version": "1.0.18",
+  "date": "2026-11-04",
+  "zh": [
+    "按云端 3DS 根目录下的归档结构识别普通存档与扩展存档，回读时不会把同名子目录误报为另一份存档。"
+  ],
+  "en": [
+    "Saves and extra data are now identified from the archive layout under the cloud 3DS root, so subfolders with the same name aren’t misreported as another save."
+  ]
+}
