@@ -37,37 +37,6 @@ const plugin = pluginCopy[locale];
     {d.stats.map(([n, label]) => <div><strong>{n}</strong><span>{label}</span></div>)}
   </section>
 
-  <section class="rom-band" id="rom-sync" aria-labelledby="rom-title">
-    <div class="wrap">
-      <div class="rom-overview">
-        <div class="rom-copy">
-          <p class="eyebrow">{d.romSync.eyebrow}</p>
-          <h2 id="rom-title">{d.romSync.title.split('\n').map((line) => <span>{line}</span>)}</h2>
-          <p>{d.romSync.body}</p>
-          <a class="text-link" href={localePath(locale, '/wiki/cloud-sync/')}>{d.romSync.more}<Icon name="arrow" size={16} /></a>
-        </div>
-        <div class="rom-visual" aria-hidden="true">
-          <div class="rom-source">
-            <Icon name="android" size={25} />
-            <strong>{d.romSync.library}</strong>
-            <ul>{d.romSync.files.map((file) => <li><Icon name="check" size={14} />{file}</li>)}</ul>
-          </div>
-          <div class="rom-route"><span>{d.romSync.upload}</span><Icon name="arrow" size={22} /></div>
-          <div class="rom-cloud">
-            <Icon name="cloud" size={42} />
-            <strong>{d.romSync.cloud}</strong>
-            <span>{d.romSync.providers}</span>
-          </div>
-          <div class="rom-route"><span>{d.romSync.download}</span><Icon name="arrow" size={22} /></div>
-          <div class="rom-device"><Icon name="android" size={28} /><strong>{d.romSync.device}</strong><span>{d.romSync.local}</span></div>
-        </div>
-      </div>
-      <ul class="rom-points">
-        {d.romSync.points.map(([title, body]) => <li><h3>{title}</h3><p>{body}</p></li>)}
-      </ul>
-    </div>
-  </section>
-
   <section class="wrap shelf">
     <PlatformList locale={locale} />
   </section>
@@ -79,6 +48,18 @@ const plugin = pluginCopy[locale];
         {d.local.steps.map(([title, body]) => <li><h3>{title}</h3><p>{body}</p></li>)}
       </ol>
     </div>
+  </section>
+
+  <section class="wrap sync rom-sync" id="rom-sync" aria-labelledby="rom-title">
+    <div class="sync-copy">
+      <p class="eyebrow">{d.romSync.eyebrow}</p>
+      <h2 id="rom-title">{d.romSync.title.split('\n').map((line) => <span>{line}</span>)}</h2>
+      <p>{d.romSync.body}</p>
+      <a class="text-link" href={localePath(locale, '/wiki/cloud-sync/')}>{d.romSync.more}<Icon name="arrow" size={16} /></a>
+    </div>
+    <ul class="rom-points">
+      {d.romSync.points.map(([title, body]) => <li><h3>{title}</h3><p>{body}</p></li>)}
+    </ul>
   </section>
 
   <section class="wrap sync" id="save-sync">
