@@ -1,0 +1,13 @@
+{
+  "product": "android",
+  "version": "1.0.33",
+  "date": "2026-11-06",
+  "zh": [
+    "双屏游戏期间，闲置屏的快捷设置气泡在 60 秒无操作后自动隐藏，减少静态内容长期显示；触摸可重新唤出，主界面原有触摸操作保持可用。",
+    "修复切换到纯黑闲置模式后，仍展开的快捷菜单停止 OLED 像素位移的问题。"
+  ],
+  "en": [
+    "During dual-screen play, the quick settings bubble on the idle screen now hides after 60 seconds of inactivity to reduce prolonged static content. Touch wakes it again, while the main interface keeps its normal touch actions.",
+    "Fixed OLED pixel shifting stopping on an open quick settings menu after switching the idle screen to black."
+  ]
+}
