@@ -49,21 +49,30 @@ Cloudflare Pages 的单文件上限是 25 MiB，APK 放不进站点，下载页�
 
 ## 发布新版本
 
-安装包在本地签名构建，Action 不参与编译。
+正式发布须有项目所有者明确的“正式更新”“正式发布”或同等指令。开发、测试、打包和本地交付不自动授权源码推送、公开 Release、网站上线或网盘更新；获得本次发布授权后，在指定产品和版本范围内连续完成整条流程。
 
-1. 写好 `changelog/<android|3ds>-x.x.x.json` 并推送。
-2. 发布安装包，脚本会用更新日志生成 Release 说明，并回读核对大小和摘要：
+安装包在主程序仓库本地构建、签名和验证，Action 不参与编译。主程序源码提交到 `Fuck996/RetroMao`，官网、Wiki、更新日志及后续 APK／CIA Release 统一在本仓库维护；主仓库历史 Release 保留。
+
+1. 核对本次产品、版本和验证记录，将已验证产物交付到既定本地目录，回读核对 SHA-256。推送对应主程序源码并回读远端 ref，记录构建源码 SHA。网站 Release 标签属于网站仓库，不能代替主程序源码版本。
+2. 写好 `changelog/<android|3ds>-x.x.x.json`，运行 `node scripts/check-changelog.mjs`；核对并安全同步本仓库远端（包括 Action 自动提交的下载数据），再提交、推送到 `main`。日志内容人工编写，Action 负责校验与构建展示，不从代码自动总结。推送会部署日志；Release 发布前下载页仍指向上一版，所以不得在获得上线授权前推送待发布日志。
+3. 使用同一安装包发布 Release。脚本从更新日志生成中英文说明，标签为 `android-x.x.x` 或 `3ds-x.x.x`，发布后读取附件核对大小和可用摘要：
 
    ```bash
    node scripts/publish-release.mjs android "U:/安卓应用/自研应用/RetroMao-x.x.x.apk"
    ```
 
-3. Release 发布后，Action 自动把版本、大小、SHA-256 和 GitHub 链接写入 `src/data/releases.json`，提交后部署网站。
-4. 把同一个安装包上传到百度网盘的分享文件夹。这一步需要手动完成；链接固定，不用改。
+   3DS 使用 `node scripts/publish-release.mjs 3ds <已验证的CIA路径>`。当前脚本在标签不存在时由 GitHub 从网站默认分支创建标签，需先确认日志已推送。已有同名 Release 时先核对，不重复创建或覆盖不同内容；没有远端摘要时须另行下载附件计算 SHA-256，不能只凭文件大小认定一致。
+
+4. Release 发布后，Action 自动同步版本、文件名、大小、SHA-256 和 GitHub 链接到 `src/data/releases.json`，提交后部署网站。Android 与 3DS 分别按数字版本选最新正式附件，不依赖全局 “Latest”；排除草稿和预发布。现有同步最多读取最近 100 个 Release，404 或没有匹配附件会保留旧数据，因此必须核对目标版本已同步。
+5. 等待对应 Action，确认 Cloudflare 部署步骤实际执行成功，再检查线上更新日志、下载页和下载链接。自动运行已触发时不重复手动触发；缺失时可在该次授权内运行 `gh workflow run website.yml --repo Fuck996/RetroMao-Website --ref main`。使用 Actions 自带 `GITHUB_TOKEN` 创建 Release 通常不会触发后续发布事件工作流，需要显式 dispatch 等正式触发方式并核对真实运行。
+6. 发布执行者通过本机已登录的 OpenList，将同一安装包上传到既定百度网盘分享文件夹。先等待成功、回读并核验内容，再清理超额旧版：Android APK 和 3DS CIA **分别保留最新两个正式版本**，按三段数字排序。只删除该目录内本次产品的超额旧安装包，保留另一产品、PDF、教程和其他文件；上传或校验失败时不删旧包。分享目录和链接固定，不按日期更换。网盘步骤由本机执行者完成，Action 不连接私人存储。
+7. 在主程序仓库的内部交付记录中保存源码 SHA、安装包摘要、Release／Action 链接和各渠道验收、保留及删除结果。任一环节失败须单独报告，不将本地交付或构建成功等同于整条发布完成。
+
+网盘保留规则只适用于指定的百度分享文件夹，GitHub 历史 Release 及本地交付文件不自动清理。OpenList 地址、内部目录和登录信息仅在内部发布规范维护，不写入本公开仓库。
 
 ## 自动校验与部署
 
-[.github/workflows/website.yml](.github/workflows/website.yml) 在推送到 `main` 或发布 Release 时运行。校验或构建失败时不会提交，也不会部署。拉取请求只校验和构建。
+[.github/workflows/website.yml](.github/workflows/website.yml) 在推送到 `main`、Release 的 `published` 事件和手动 `workflow_dispatch` 时运行。非拉取请求运行依次同步下载数据、校验日志、安装锁定依赖、构建、提交数据变化并部署；Release 事件也检出 `main`。校验或构建失败时不会提交，也不会部署。拉取请求只校验和构建。推送 `main` 和手动触发均属于上线操作，须有对应授权。
 
 需要在仓库的 Settings → Secrets and variables → Actions 中添加：
 
@@ -72,7 +81,9 @@ Cloudflare Pages 的单文件上限是 25 MiB，APK 放不进站点，下载页�
 | `CLOUDFLARE_API_TOKEN` | Cloudflare API 令牌，权限为 Cloudflare Pages: Edit |
 | `CLOUDFLARE_ACCOUNT_ID` | Cloudflare 账户 ID |
 
-没有配置时，Action 只构建并给出警告，不会部署。部署前需要先创建 Pages 项目 `retromao`。
+没有配置令牌时，Action 只构建并给出警告，不会部署，整体仍可能显示成功；发布验收必须查看部署步骤和线上结果。部署前需要先创建 Pages 项目 `retromao`。Action 使用 `GITHUB_TOKEN` 回写下载数据通常不会再触发一次 push 工作流，同一次运行负责部署。
+
+现有发布通道为 GitHub Action 直接上传 Cloudflare Pages。下文的 Cloudflare Git 集成属于替代方案，避免与现有通道同时启用，导致重复部署或抢先发布未同步的下载信息；切换通道需先核对完整同步流程。
 
 ## 首页的模型和游戏图片
 
