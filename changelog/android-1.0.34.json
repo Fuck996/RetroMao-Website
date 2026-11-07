@@ -1,0 +1,15 @@
+{
+  "product": "android",
+  "version": "1.0.34",
+  "date": "2026-11-07",
+  "zh": [
+    "精简游戏列表底部的英文按键提示，统一用 Platform 表示游戏平台。",
+    "补齐机种名称、存档目录、RetroArch 存档设置和存档历史的翻译，以及配对、下载和删除等操作中的提示。",
+    "社区扩展语言包需要使用与本版词表兼容的版本。"
+  ],
+  "en": [
+    "Shortened the English button hints below the game list and standardized the term Platform for game platforms.",
+    "Added missing translations for platform names, save folders, RetroArch save settings, save history, and messages shown during pairing, downloads, and deletion.",
+    "Community language packs need to match this version's translation catalog."
+  ]
+}
