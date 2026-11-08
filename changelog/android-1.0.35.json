@@ -3,9 +3,9 @@
   "version": "1.0.35",
   "date": "2026-11-08",
   "zh": [
-    "为使用旧版 Android System WebView 的设备加入 3DS 上屏动画兼容模式。"
+    "为部分使用旧版 Android System WebView 的设备加入 3DS 上屏动画兼容模式。"
   ],
   "en": [
-    "Added a compatibility mode for 3DS animations on the top screen on devices with older versions of Android System WebView."
+    "Added a compatibility mode for top-screen 3DS animations on devices with supported older versions of Android System WebView."
   ]
 }
