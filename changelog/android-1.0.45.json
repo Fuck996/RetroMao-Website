@@ -1,0 +1,21 @@
+{
+  "product": "android",
+  "version": "1.0.45",
+  "date": "2026-11-09",
+  "zh": [
+    "新增可下载的 DECK 主题。最近游戏横向展示介质或包装盒模型，列表末尾可打开游戏库。3DS 模式可在游戏库使用。",
+    "开放主题格式支持分别配置导航、游戏卡片、详情、双屏布局和模型动效。主题还可指定轮播焦点居中、列表长度和资源状态角标，旧主题包继续兼容。",
+    "主题选择页优先展示已安装的主题，有兼容更新时可点卡片上的图标升级。社区主题下载遇到 HTTP 504 时会改走 GitHub 官方资产接口，并校验文件完整性。",
+    "模型轮播按实际宽度调整卡槽和间距。未选中的 Switch 卡带和 PSP UMD 与选中预览使用相同模型，修复了介质和包装盒倒影末端的彩边。",
+    "双屏上屏的模型预览和下屏游戏列表的视频可以独立显示。顶栏显示换页键，游戏页面底部显示切换机种的按键。",
+    "改进 3DS 卡带的标签贴合与外壳颜色，调整 3DS 横幅的麦克风响应。设备休眠时会停止后台自动扫描游戏库。"
+  ],
+  "en": [
+    "Added DECK as a downloadable theme. Recent Games shows media or box models in a horizontal carousel with a library shortcut at the end. 3DS mode is available in the game library.",
+    "Themes can configure navigation, game cards, details, dual-screen layouts, and model animations independently. They can also set a centred carousel focus, a list length, and resource badges. Older theme packs remain compatible.",
+    "The theme picker lists installed themes first and shows an update icon on cards with a compatible update. If a community theme download returns HTTP 504, the app fetches the asset through GitHub's official API and checks the file before installing.",
+    "Carousel slots and spacing follow actual model widths. Unselected Switch cards and PSP UMDs now use the same models as the selected preview. Fixed the coloured fringe at the end of media and box reflections.",
+    "On dual screens, the top-screen model preview and bottom-screen list video can display independently. The top bar shows page controls, and game pages show platform-switching controls in the footer.",
+    "Improved 3DS cartridge label fit and shell colour, and adjusted microphone response in 3DS banners. Automatic background library scans stop when the device goes to sleep."
+  ]
+}
