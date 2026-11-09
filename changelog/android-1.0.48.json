@@ -1,0 +1,17 @@
+{
+  "product": "android",
+  "version": "1.0.48",
+  "date": "2026-11-09",
+  "zh": [
+    "启用并配置 Vita3K 同步插件后，PS Vita 游戏库会核对模拟器中的游戏本体目录。只剩启动索引时会显示本体缺失，有云端备份的游戏可重新下载。",
+    "优化 PS Vita 卡带模型的标签比例、塑料质感和外壳细节。",
+    "主题可在游戏库详情中使用无底板展台，让模型直接立在地面上，并配置倒影与切换动作。",
+    "首页横向列表可按机种选择显示游戏介质或包装盒。未单独设置的机种沿用设置页中的默认选择。"
+  ],
+  "en": [
+    "With the Vita3K sync plugin enabled and configured, the PS Vita library checks for each game's installation directory. Games with only a launch index are marked as missing, and games with a cloud backup can be downloaded again.",
+    "Refined the PS Vita cartridge model's label proportions, plastic finish, and molded details.",
+    "Themes can place the game details model directly on the floor and configure reflections and switching animations.",
+    "Choose game media or boxes for the horizontal home list on a per-platform basis. Platforms without their own setting follow the default in Settings."
+  ]
+}
