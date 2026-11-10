@@ -4,11 +4,13 @@
 // 规则：只读取已正式发布的 Release；文件名必须是 RetroMao-x.x.x.apk 或 RetroMao-3DS-x.x.x.cia；
 // 版本不会回退；仓库不存在或没有匹配文件时保留现有数据。
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { hasAndroidUpdateManifest, verifyAndroidUpdateManifest } from './android-update.mjs';
 
 const dataPath = join(dirname(fileURLToPath(import.meta.url)), '../src/data/releases.json');
+const updatePath = join(dirname(dataPath), 'android-update.json');
 const api = process.env.GITHUB_API_URL || 'https://api.github.com';
 const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'retromao-website' };
 if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
@@ -42,7 +44,7 @@ for (const release of response.ok ? await response.json() : []) {
     for (const [product, pattern] of Object.entries(PATTERNS)) {
       const version = pattern.exec(asset.name)?.[1];
       if (version && (!latest[product] || compare(version, latest[product].version) > 0)) {
-        latest[product] = { version, asset };
+        latest[product] = { version, asset, release };
       }
     }
   }
@@ -62,6 +64,22 @@ for (const [product, found] of Object.entries(latest)) {
     sha256: await digestOf(found.asset),
     githubUrl: found.asset.browser_download_url,
   };
+  if (product === 'android' && hasAndroidUpdateManifest(found.version)) {
+    const tag = `android-${found.version}`;
+    const manifest = found.release.assets.find((asset) => asset.name === `RetroMao-${found.version}.update.json`);
+    const prefix = `https://github.com/${data.repository}/releases/download/${tag}/`;
+    if (found.release.tag_name !== tag || found.asset.state !== 'uploaded' || next.githubUrl !== prefix + next.file ||
+        manifest?.state !== 'uploaded' || manifest.size < 1 || manifest.size > 8192 ||
+        manifest.browser_download_url !== prefix + manifest.name) {
+      throw new Error(`${tag} 缺少正式 APK 或签名更新清单`);
+    }
+    const response = await fetch(manifest.browser_download_url, { headers: { 'User-Agent': headers['User-Agent'] } });
+    if (!response.ok) throw new Error(`下载 ${manifest.name} 失败：HTTP ${response.status}`);
+    const bytes = Buffer.from(await response.arrayBuffer());
+    if (bytes.length !== manifest.size) throw new Error(`${manifest.name} 附件大小不一致`);
+    verifyAndroidUpdateManifest(bytes, next.version, next.sizeBytes, next.sha256);
+    if (!existsSync(updatePath) || !readFileSync(updatePath).equals(bytes)) writeFileSync(updatePath, bytes);
+  }
   if (JSON.stringify(next) !== JSON.stringify(current)) {
     data.products[product] = next;
     changed = true;

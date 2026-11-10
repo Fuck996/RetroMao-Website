@@ -1,0 +1,15 @@
+{
+  "product": "android",
+  "version": "1.1.0",
+  "date": "2026-11-10",
+  "zh": [
+    "在「关于复古猫」中检查、下载并安装更新，也可开启启动时自动检查。",
+    "GitHub 无法连接或下载中断时，自动切换到 GHFast。更新包通过校验后，由安卓系统确认安装。",
+    "从 1.0.x 升级到本版需手动覆盖安装一次，之后可在应用内更新。"
+  ],
+  "en": [
+    "Check for, download, and install updates from About RetroMao, with an option to check automatically at startup.",
+    "Switch to GHFast when GitHub is unavailable or the download is interrupted. Verified updates are handed to Android for installation confirmation.",
+    "Install this version manually over 1.0.x once. Future updates can be installed from the app."
+  ]
+}

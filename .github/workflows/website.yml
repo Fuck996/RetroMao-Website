@@ -44,6 +44,7 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           git add src/data/releases.json
+          if [ -f src/data/android-update.json ]; then git add src/data/android-update.json; fi
           if git diff --cached --quiet; then
             echo "Download data is unchanged."
             exit 0
