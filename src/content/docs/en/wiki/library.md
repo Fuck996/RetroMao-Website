@@ -37,6 +37,8 @@ Choose a style in **Settings → Appearance**:
 
 You can also download **Community themes** or import a theme pack. Installing a theme doesn't change your current one, so you can preview it before applying it.
 
+See [Install and update themes](../themes/) for the steps.
+
 ## Media preview
 
 Each game can show its cover, 3D box, game media and video. Adjust the options in **Settings → Preview**. Models use a built-in placeholder when artwork is missing.

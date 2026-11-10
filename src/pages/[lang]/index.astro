@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import LibraryMock from '../../components/LibraryMock.astro';
 import Icon from '../../components/Icon.astro';
 import PlatformList from '../../components/PlatformList.astro';
-import { communityRepo } from '../../data/site';
+import { communityRepo, introVideo } from '../../data/site';
 import { pluginCopy } from '../../i18n/plugins';
 import { localePath, locales, t, type Locale } from '../../i18n/ui';
 
@@ -12,6 +12,12 @@ const locale = Astro.params.lang as Locale;
 const d = t(locale);
 const titleLines = d.hero.title.split('\n');
 const plugin = pluginCopy[locale];
+const videoHost = introVideo.sources[locale].find((host) => introVideo[host]);
+const video = videoHost === 'bilibili'
+  ? { embed: `https://player.bilibili.com/player.html?bvid=${introVideo.bilibili}&autoplay=0&danmaku=0&high_quality=1`, page: `https://www.bilibili.com/video/${introVideo.bilibili}/` }
+  : videoHost === 'youtube'
+    ? { embed: `https://www.youtube-nocookie.com/embed/${introVideo.youtube}?rel=0`, page: `https://www.youtube.com/watch?v=${introVideo.youtube}` }
+    : null;
 ---
 <Layout locale={locale} current="home" title={d.meta.homeTitle} description={d.meta.homeDesc}>
   <section class="hero wrap">
@@ -32,6 +38,16 @@ const plugin = pluginCopy[locale];
     </div>
     <LibraryMock locale={locale} />
   </section>
+
+  {video && videoHost && (
+    <section class="wrap intro-video" aria-labelledby="intro-video-title">
+      <h2 id="intro-video-title">{d.video.title}</h2>
+      <div class="video-frame">
+        <iframe src={video.embed} title={d.video.title} loading="lazy" allow="fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <a class="text-link" href={video.page} target="_blank" rel="noopener">{d.video.watchOn.replace('%s', d.video.names[videoHost])}<Icon name="arrow" size={16} /></a>
+    </section>
+  )}
 
   <section class="wrap stats" aria-label="RetroMao">
     {d.stats.map(([n, label]) => <div><strong>{n}</strong><span>{label}</span></div>)}

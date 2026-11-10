@@ -50,6 +50,7 @@ export default defineConfig({
         group('使用', '使用', 'Use', '使い方', [
           { slug: 'wiki/quick-start' },
           { slug: 'wiki/library' },
+          { slug: 'wiki/themes' },
           { slug: 'wiki/import' },
           { slug: 'wiki/cloud-sync' },
           { slug: 'wiki/saves' },

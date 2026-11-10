@@ -56,6 +56,7 @@ const zhHans = {
     themes: { modern: '流光', library: '藏馆', warm: '简约白', black: '简约黑' },
     all: '全部',
   },
+  video: { title: '一分钟认识复古猫', watchOn: '在%s观看', names: { bilibili: '哔哩哔哩', youtube: 'YouTube' } },
   stats: [['35', '个机种的包装与介质模型'], ['4', '种内置语言，可自动匹配'], ['3', '种界面风格，主题可扩展'], ['0', '个账号，不配置网盘也能用']],
   shelf: {
     title: '每台机器，都有它自己的盒子',
@@ -172,6 +173,7 @@ const zhHant: Dict = {
     themes: { modern: '流光', library: '藏館', warm: '簡約白', black: '簡約黑' },
     all: '全部',
   },
+  video: { title: '一分鐘認識復古貓', watchOn: '在%s觀看', names: { bilibili: '嗶哩嗶哩', youtube: 'YouTube' } },
   stats: [['35', '個機種的包裝與媒介模型'], ['4', '種內建語言，可自動比對'], ['3', '種介面風格，主題可擴充'], ['0', '個帳號，不設定網盤也能用']],
   shelf: {
     title: '每台機器，都有它自己的盒子',
@@ -286,6 +288,7 @@ const en: Dict = {
     themes: { modern: 'Lumen', library: 'Vault', warm: 'Minimal White', black: 'Minimal Black' },
     all: 'All',
   },
+  video: { title: 'RetroMao in one minute', watchOn: 'Watch on %s', names: { bilibili: 'Bilibili', youtube: 'YouTube' } },
   stats: [['35', 'systems with box and media models'], ['4', 'built-in languages, matched automatically'], ['3', 'interface styles, plus theme packs'], ['0', 'accounts needed, no cloud required']],
   shelf: {
     title: 'Every console gets its own box',
@@ -400,6 +403,7 @@ const ja: Dict = {
     themes: { modern: 'ルーメン', library: 'ヴォルト', warm: 'シンプル白', black: 'シンプル黒' },
     all: 'すべて',
   },
+  video: { title: '1 分でわかる RetroMao', watchOn: '%s で見る', names: { bilibili: 'Bilibili', youtube: 'YouTube' } },
   stats: [['35', '機種のパッケージとメディアのモデル'], ['4', '内蔵言語（自動で選択）'], ['3', '画面スタイルとテーマパック'], ['0', 'アカウント不要、クラウドなしでも利用可']],
   shelf: {
     title: 'どの機種にも、その機種の箱を',

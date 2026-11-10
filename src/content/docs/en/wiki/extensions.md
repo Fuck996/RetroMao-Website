@@ -32,6 +32,8 @@ Download the ZIP from the repository's Release. **Don't unzip it.** Copy it to y
 - Systems: **Settings → Library → Import system pack**
 - Plugins: Import from **Plugins → Installed**
 
+For installation, preview, and update instructions, see [Install and update themes](../themes/).
+
 ## Security
 
 - Languages, systems and themes only contain configuration and assets. They don't run code.

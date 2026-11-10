@@ -50,6 +50,18 @@ export const author = {
   ],
 } as const;
 
+/** 首页介绍视频。按语言依次尝试 sources 里的平台，第一个已填写的生效；加 YouTube 只需填 youtube。 */
+export const introVideo = {
+  bilibili: 'BV11Y476ZENF',
+  youtube: '',
+  sources: {
+    'zh-hans': ['bilibili', 'youtube'],
+    'zh-hant': ['bilibili', 'youtube'],
+    en: ['youtube', 'bilibili'],
+    ja: ['youtube', 'bilibili'],
+  },
+} as const;
+
 export const communityRepo = 'https://github.com/Fuck996/RetroMao-Community';
 
 /** 内置机种，与 app/src/main/assets/models/catalog.json 对应。 */
