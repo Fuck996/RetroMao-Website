@@ -1,0 +1,19 @@
+{
+  "product": "android",
+  "version": "1.1.7",
+  "date": "2026-11-11",
+  "zh": [
+    "更新到 DECK 1.1.4 后，在游戏间切换卡带或光盘时会播放短音效。",
+    "游戏库新增按首字母和按索引排序。",
+    "启动时发现新版本，可直接从提示弹窗下载更新。",
+    "修复天马 G 街机 ROM 和资料同步时的目录冲突。下载时保留来源子目录，同名 ZIP 和 7z 游戏也能批量上传共享的封面、Logo 和视频。",
+    "修复双屏运行外部游戏或应用时，快捷设置气泡出现在错误屏幕的问题。"
+  ],
+  "en": [
+    "Update to DECK 1.1.4 to hear a short sound when switching cartridges or discs between games.",
+    "Added alphabetical and index-order sorting to the game library.",
+    "When an update is found at startup, you can download it directly from the update dialog.",
+    "Fixed folder conflicts when syncing arcade ROMs and media imported from Pegasus G. Downloads preserve the original subfolders, and ZIP and 7z games with matching names can upload shared covers, logos, and videos in one batch.",
+    "Fixed the Quick Settings bubble appearing on the wrong screen while an external game or app is running in dual-screen mode."
+  ]
+}
