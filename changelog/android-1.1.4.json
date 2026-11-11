@@ -1,0 +1,17 @@
+{
+  "product": "android",
+  "version": "1.1.4",
+  "date": "2026-11-11",
+  "zh": [
+    "修复 Deck 最近游戏列表中点击已选中卡带却进入模型检视的问题。双屏时，上屏展示包装盒也可以在下屏播放卡带插入动画。",
+    "修复直接在网盘删除 ROM 后，游戏库仍显示不可用云端游戏的问题。刷新后会隐藏已无可用 ROM 的条目，文件恢复后可重新显示。",
+    "调整日版 SFC 卡带的外壳弧度和标签槽，标签贴合拱起的壳面。",
+    "减弱 PS Vita 卡带外壳和标签的反光，让标签在卡带转动时更清楚。"
+  ],
+  "en": [
+    "Fixed tapping the selected game card in Deck’s recent games list opening model inspection. In dual-screen mode, the insertion animation can play on the lower screen while the upper screen displays the box.",
+    "Fixed unavailable cloud games staying in the library after their ROMs were deleted directly from cloud storage. Refreshing hides entries with no available ROMs, and they can reappear when the files are restored.",
+    "Refined the shell curves and label recess of Japanese Super Famicom cartridges so the label follows the curved front.",
+    "Reduced glare on PS Vita game card shells and labels, making the label easier to see as the card turns."
+  ]
+}
