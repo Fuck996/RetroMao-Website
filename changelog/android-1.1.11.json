@@ -1,0 +1,21 @@
+{
+  "product": "android",
+  "version": "1.1.11",
+  "date": "2026-11-12",
+  "zh": [
+    "支持在网盘与 WebDAV 设置中选择当前同步来源，分别保留各来源的游戏库关联和存档同步配置，切换时不再重新整理整个游戏库。",
+    "文件夹卡片只显示当前来源中已有对应内容的云端目录，不再把预设上传路径显示为已有同步关联；已创建的资源任务继续使用原来源。",
+    "首次升级会在复古猫启动界面显示加载进度并整理已有资料，支持中断后恢复；已完成整理的游戏库无需重复处理。",
+    "修复雷电2等包含较多 ROM 版本的街机游戏上传时提示硬件资料无效的问题。",
+    "优化游戏库切换机种时的过渡效果。",
+    "修复从更新提示弹窗打开更新日志的问题。"
+  ],
+  "en": [
+    "Choose the active sync source in cloud and WebDAV settings. Library associations and save sync settings are retained separately for each source, without reorganizing the entire library when switching.",
+    "Folder cards show remote directories only when the active source has matching content, instead of treating preset upload paths as existing sync associations. Existing resource tasks keep their original source.",
+    "The first upgrade shows loading progress in RetroMao while preparing existing library data, with recovery after interruption. Libraries that have already completed this step do not repeat it.",
+    "Fixed uploads of arcade games with many ROM variants, such as Raiden II, failing with an invalid hardware information error.",
+    "Improved transitions when switching platforms in the game library.",
+    "Fixed opening release notes from the update prompt."
+  ]
+}
