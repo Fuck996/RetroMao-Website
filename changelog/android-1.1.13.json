@@ -1,0 +1,17 @@
+{
+  "product": "android",
+  "version": "1.1.13",
+  "date": "2026-11-13",
+  "zh": [
+    "修复 DECK 主题偶尔显示不出卡带或光盘贴图的问题。贴图恢复可读后会重新加载，切换游戏时会保留静帧，直到新的 3D 画面就绪。",
+    "修复没有本地 ROM 的游戏在远端 ROM 确认缺失后仍留在普通列表的问题。远端 ROM 恢复后，游戏会重新显示。",
+    "修复远端 ROM 状态未知或部分媒体已经删除时，剩余远端资料无法清理的问题。游戏从列表隐藏后，仍可在「设置 → 游戏库与文件夹 → 剩余远端资料」管理封面、视频和游戏资料。",
+    "社区主题、语言包和插件在 GitHub 和 GHFast 都无法连接时，可以继续尝试备用镜像。"
+  ],
+  "en": [
+    "Fixed missing cartridge and disc artwork in the DECK theme. Artwork reloads when it becomes available, and a still image remains visible until the new 3D frame is ready.",
+    "Fixed games with no local ROM remaining in the library after their remote ROM was confirmed missing. They reappear when the remote ROM is restored.",
+    "Fixed cleanup of remaining cloud media when the remote ROM status is unknown or some media has already been removed. After a game is hidden, manage its covers, videos, and metadata under Settings → Game Library and Folders → Remaining Cloud Media and Metadata.",
+    "Community themes, language packs, and plugins can now use a backup mirror if GitHub and GHFast are both unreachable."
+  ]
+}
