@@ -2,11 +2,11 @@
   "repository": "Fuck996/RetroMao-Website",
   "products": {
     "android": {
-      "version": "1.1.11",
-      "file": "RetroMao-1.1.11.apk",
-      "sizeBytes": 83972173,
-      "sha256": "0e529562407378448119b96f84913099cc98dc4a5d1654af01d9a1ef43373378",
-      "githubUrl": "https://github.com/Fuck996/RetroMao-Website/releases/download/android-1.1.11/RetroMao-1.1.11.apk"
+      "version": "1.1.12",
+      "file": "RetroMao-1.1.12.apk",
+      "sizeBytes": 83988557,
+      "sha256": "9e7f98dd69d94efb959679ea14a57576b8c1f31d962095843968b7f773e7d228",
+      "githubUrl": "https://github.com/Fuck996/RetroMao-Website/releases/download/android-1.1.12/RetroMao-1.1.12.apk"
     },
     "3ds": {
       "version": "1.0.24",
