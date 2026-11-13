@@ -1,0 +1,15 @@
+{
+  "product": "android",
+  "version": "1.1.12",
+  "date": "2026-11-13",
+  "zh": [
+    "社区主题、语言包和插件的目录、预览及下载在 GitHub 连接失败、限流或服务异常时会自动切换到 GHFast 镜像。",
+    "启用封面取色后，连续切换游戏时背景颜色过渡更平滑，封面尚未加载时会保留当前色调。",
+    "减少切换机种时重复读取游戏库，改善游戏较多时的切换响应。"
+  ],
+  "en": [
+    "Community theme, language pack, and plugin catalogs, previews, and downloads automatically switch to the GHFast mirror if GitHub is unreachable, rate-limited, or experiencing a service error.",
+    "When cover-based colors are enabled, backgrounds transition more smoothly as you browse games and keep their current color while the next cover loads.",
+    "Switching platforms reads the game library less often, improving responsiveness in large libraries."
+  ]
+}
