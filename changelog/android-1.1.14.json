@@ -1,0 +1,15 @@
+{
+  "product": "android",
+  "version": "1.1.14",
+  "date": "2026-11-17",
+  "zh": [
+    "修复 ROM 总目录下多个子目录的机种识别和刷新范围。相邻目录可各自识别机种，索引和 CUE 仍可引用授权范围内的其他子目录。",
+    "修复双屏设备在游戏运行期间显示闲置画面时抢走手柄焦点的问题，闲置画面仍可触摸操作。",
+    "存档设置为 Eden 新增 Switch 玩家存档关联，可按玩家和游戏分别配置 WebDAV 同步。"
+  ],
+  "en": [
+    "Fixed platform detection and refresh scope for subfolders in a ROM library. Neighboring folders can be identified independently, and indexes and CUE files can still reference other subfolders within the granted directory.",
+    "Fixed the idle screen taking controller focus from a running game on dual-screen devices. The idle screen still responds to touch.",
+    "Added a Switch player-save option to Eden's save settings, with WebDAV sync configured separately for each player and game."
+  ]
+}
