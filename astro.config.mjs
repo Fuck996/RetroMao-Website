@@ -42,6 +42,7 @@ export default defineConfig({
           { slug: 'wiki' },
           { slug: 'wiki/platforms' },
           { slug: 'wiki/plugins' },
+          { slug: 'wiki/ai-plan' },
         ]),
         group('安装', '安裝', 'Install', 'インストール', [
           { slug: 'wiki/install-android' },
