@@ -1,0 +1,13 @@
+{
+  "product": "android",
+  "version": "1.1.15",
+  "date": "2026-11-19",
+  "zh": [
+    "修复双屏模式下，从副屏点击「获取授权」时无法打开百度网盘授权页的问题。",
+    "更新日版 Game Boy Color 透明卡带模型，调整外壳轮廓、顶部握位和标签槽，细化背面与内部电路板。现有卡带标签可继续使用。"
+  ],
+  "en": [
+    "Fixed an issue that prevented the Baidu Netdisk authorization page from opening from the secondary screen in dual-screen mode.",
+    "Updated the Japanese Game Boy Color cartridge model with a refined transparent shell, top grip, label recess, back details, and internal circuit board. Existing cartridge labels still fit."
+  ]
+}
