@@ -1,0 +1,17 @@
+{
+  "product": "android",
+  "version": "1.2.5",
+  "date": "2026-11-22",
+  "zh": [
+    "添加百度网盘时，可在复古猫内打开百度官方登录页并用手机扫码。",
+    "点击已添加的百度网盘会进入云端目录设置，可从更多菜单重新授权。移除同步源会解除对应的目录和存档同步关联，保留本机和网盘文件。",
+    "修复了另一屏仍有应用运行时，退出上屏应用后复古猫无响应、手柄按键和摇杆失效的问题。",
+    "双屏中只有一屏显示复古猫主界面时，游戏库会在当前屏显示游戏详情和卡带模型。"
+  ],
+  "en": [
+    "Add Baidu Netdisk by opening Baidu’s official sign-in page in RetroMao and scanning the QR code with your phone.",
+    "Tap a saved Baidu Netdisk source to open its cloud folder settings, and use the More menu to reauthorize. Removing a sync source disconnects its folders and save sync while keeping local and cloud files.",
+    "Fixed an issue that could leave RetroMao unresponsive or block controller buttons and sticks after closing an app on the upper screen while another app keeps running below.",
+    "When only one of the two screens shows the RetroMao main interface, that screen displays game details and cartridge models."
+  ]
+}
